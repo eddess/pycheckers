@@ -173,6 +173,9 @@ def main():
     parser.add_option(
         "--msg-template",
         help=("Just for flycheck's sake"))
+    parser.add_option(
+        "--rcfile",
+        help=("Just for flycheck's sake"))
     options, filenames = parser.parse_args()
 
     if len(filenames) < 1:
