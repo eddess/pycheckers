@@ -130,6 +130,8 @@ class PylintRunner(LintRunner):
             'W0232',  # no init method in class
             'E1120',  # no constructor for
             'C0330',  # wrong indentation handled by pep8
+            'R0201',  # method could be a function
+            'E0602',  # symbol not defined wildcard import. Handled by Jedi
         ])
 
     @property
