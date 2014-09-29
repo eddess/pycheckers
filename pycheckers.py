@@ -131,7 +131,6 @@ class PylintRunner(LintRunner):
             'E1120',  # no constructor for
             'C0330',  # wrong indentation handled by pep8
             'R0201',  # method could be a function
-            'E0602',  # symbol not defined wildcard import. Handled by Jedi
             'W0406',  # module import self in __init__
         ])
 
