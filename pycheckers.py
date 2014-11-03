@@ -132,6 +132,12 @@ class PylintRunner(LintRunner):
             'C0330',  # wrong indentation handled by pep8
             'R0201',  # method could be a function
             'W0406',  # module import self in __init__
+            'R0914',  # Too many local variables
+            'R0912',  # Too many branches
+            'R0801',  # Similar lines
+            'C0111',  # Missing module docstring
+            'R',      # Refactors
+            'C0103',  # invalid variable name
         ])
 
     @property
