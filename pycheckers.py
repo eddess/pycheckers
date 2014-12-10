@@ -138,6 +138,7 @@ class PylintRunner(LintRunner):
             'C0111',  # Missing module docstring
             'R',      # Refactors
             'C0103',  # invalid variable name
+            'W0142',  # magic used
         ])
 
     @property
