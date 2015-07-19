@@ -52,7 +52,7 @@ class LintRunner(object):
         self.env = None
         self._debug = debug
         self.output_matcher = re_compile(
-            r'^(([a-zA-Z]:){0,1}[^:]+):(\d+):(\d+): ([a-zA-Z]\d+) (.*)$')
+            r'^(([a-zA-Z]:){0,1}[^:]+):(\d+):(\d+):([a-zA-Z]\d+):(.*)$')
 
     @property
     def run_flags(self):  # pylint: disable=R0201
@@ -64,13 +64,13 @@ class LintRunner(object):
         line_m = self.output_matcher.match(line)
         output = ''
         if line_m is not None:
-            column = int(line_m.group(4)) + 1
             code = line_m.group(5)[0]
             if code in ['C', 'E', 'R', 'W']:
                 output = filename + ':' + line_m.group(3) + ':' \
-                    + str(column) + ':' \
+                    + line_m.group(4) + ':' \
                     + line_m.group(5)[0] + ':' \
-                    + '(' + line_m.group(5) + ') ' + line_m.group(6)
+                    + line_m.group(5) + ':' \
+                    + line_m.group(6)
             else:
                 return
             print(output)
@@ -144,7 +144,7 @@ class PylintRunner(LintRunner):
     @property
     def run_flags(self):
         return ('--reports=no',
-                '--msg-template="{path}:{line}:{column}: {msg_id} {msg}"',
+                '--msg-template="{path}:{line}:{column}:{msg_id}:{msg}"',
                 '--disable=' + ','.join(self.sane_default_ignore_codes))
 
 
@@ -196,7 +196,7 @@ def main():
             print('Error: ' + filename + ' does not exist')
             exit(1)
 
-    for RunnerClass in {Pep8Runner, PylintRunner}:  # pylint: disable=C0103
+    for RunnerClass in {Pep8Runner, PylintRunner}:
         runner = RunnerClass(debug=options.debug)
         try:
             runner.run(filenames)
